@@ -1,12 +1,14 @@
-﻿using Candidates.Models;
+﻿using Candidates.Entities;
+using Candidates.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Candidates.Core.Contracts
 {
     public interface ICandidateCore
     {
-        CoreResponseModel<object> UpsertCandidate(UpsertCandidateModel upsertCandidateModel);
+        Task<CoreResponseModel<object>> UpsertCandidate(UpsertCandidateModel upsertCandidateModel);
     }
 }

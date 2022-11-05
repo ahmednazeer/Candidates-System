@@ -1,7 +1,10 @@
 ﻿using Candidates.Core.Contracts;
 using Candidates.Dal.contracts;
+using Candidates.Entities;
 using Candidates.Models;
 using System;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Candidates.Core
 {
@@ -13,10 +16,13 @@ namespace Candidates.Core
         {
             _candidateDal = candidateDal;
         }
-        public CoreResponseModel<object> UpsertCandidate(UpsertCandidateModel upsertCandidateModel)
+        public async Task< CoreResponseModel<object>> UpsertCandidate(UpsertCandidateModel upsertCandidateModel)
         {
-            var candidate=_candidateDal.UpsertCandidate(upsertCandidateModel);
-            throw new NotImplementedException();
+            if(upsertCandidateModel.IsValid())
+                return await _candidateDal.UpsertCandidate(upsertCandidateModel);
+            else
+                return new CoreResponseModel<object> ( null,  System.Net.HttpStatusCode.BadRequest );
+            
         }
     }
 }
