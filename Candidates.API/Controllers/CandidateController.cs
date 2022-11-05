@@ -1,4 +1,5 @@
 ﻿using Candidates.Core.Contracts;
+using Candidates.Helpers.filters;
 using Candidates.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ namespace Candidates.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CandidateController : ControllerBase
+    public class CandidateController : ApiBaseController
     {
         private readonly ICandidateCore _candidateCore;
 
@@ -16,12 +17,12 @@ namespace Candidates.API.Controllers
         {
             _candidateCore = candidateCore;
         }
-
-        [HttpPut]
+        
+        [HttpPut]        
         public async Task<IActionResult> UpsertCandidate([FromBody] UpsertCandidateModel upsertCandidateModel)
         {
-            _candidateCore.UpsertCandidate(upsertCandidateModel);
-            return Ok();
+            
+            return GetActionResultByModel( await _candidateCore.UpsertCandidate(upsertCandidateModel));
         }
 
     }

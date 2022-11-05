@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Candidates.Core\Candidates.Core.csproj" />
     <ProjectReference Include="..\Candidates.Dal\Candidates.Dal.csproj" />
     <ProjectReference Include="..\Candidates.Data\Candidates.Data.csproj" />

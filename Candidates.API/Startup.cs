@@ -5,6 +5,8 @@ using Candidates.Dal.contracts;
 using Candidates.Data;
 using Candidates.Data.contracts;
 using Candidates.Entities;
+using Candidates.Helpers;
+using Candidates.Helpers.filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,20 +35,24 @@ namespace Candidates.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddScoped<ICandidatesContext<BaseEntity>, CandidatesContext>();
+            services.AddScoped<IDataContext,CSVContext>();
             services.AddScoped<ICandidateCore, CandidateCore>();
             services.AddScoped<ICandidateDal, CandidateDal>();
-            //services.AddScoped<ICandidatesContext, CandidatesContext>();
+            services.AddAutoMapper(typeof(CandidateProfile));
+            services.AddScoped<CandidatesDataReader>();
+            
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, CandidatesDataReader candidatesDataReader)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            candidatesDataReader.LoadCandidates();
 
             app.UseHttpsRedirection();
 
