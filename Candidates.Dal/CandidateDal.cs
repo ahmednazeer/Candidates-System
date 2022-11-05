@@ -28,7 +28,7 @@ namespace Candidates.Dal
             Candidate candidate = _mapper.Map<Candidate>(upsertCandidateModel);
             CandidatesDataReader.CandidatesDict[upsertCandidateModel.Email] =candidate;
             _context.SaveChanges();
-            return new CoreResponseModel<object> ( candidate,System.Net.HttpStatusCode.OK );
+            return new CoreResponseModel<object> (candidate, System.Net.HttpStatusCode.OK );
             
         }
     }

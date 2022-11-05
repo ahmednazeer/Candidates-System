@@ -13,19 +13,18 @@ namespace Candidates.Models
 {
     public class UpsertCandidateModel
     {
-        [Required]
+        
         public string Firstname { get; set; }
-        [Required]
+        
         public string Laststname { get; set; }
         public string PhoneNumber { get; set; }
-        [Required]
-        [EmailAddress]
+        
         public string Email { get; set; }
         
         public string LinkedInProfileURL { get; set; }
         
         public string GitHubProfileURL { get; set; }
-        [Required]
+       
         public string FreeTextComment { get; set; }
 
         public bool IsValid()
@@ -41,7 +40,7 @@ namespace Candidates.Models
             {
                 return Regex.IsMatch(emailAddress.ToString(), Constants.EmailRegex, RegexOptions.IgnoreCase);
             }
-            throw new ArgumentNullException("emailAddress", ErrorMessages.EmailAddressErrorMessage);
+            throw new ArgumentNullException(Constants.EmailAddress, ErrorMessages.EmailAddressErrorMessage);
         }
     }
 }
