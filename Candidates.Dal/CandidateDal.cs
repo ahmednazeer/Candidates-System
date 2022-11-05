@@ -23,11 +23,9 @@ namespace Candidates.Dal
             _context = dataContext;
             _mapper = mapper;
         }
-        public async  Task<CoreResponseModel<object>> UpsertCandidate(UpsertCandidateModel upsertCandidateModel)
+        public async Task<CoreResponseModel<object>> UpsertCandidate(UpsertCandidateModel upsertCandidateModel)
         {
-            CandidatesDataReader.CandidatesDict.TryGetValue(upsertCandidateModel.Email, out Candidate candidate);
-            candidate = _mapper.Map<Candidate>(upsertCandidateModel);
-
+            Candidate candidate = _mapper.Map<Candidate>(upsertCandidateModel);
             CandidatesDataReader.CandidatesDict[upsertCandidateModel.Email] =candidate;
             _context.SaveChanges();
             return new CoreResponseModel<object> ( candidate,System.Net.HttpStatusCode.OK );

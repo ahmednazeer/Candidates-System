@@ -14,15 +14,12 @@ namespace Candidates.Data
     public class CSVContext : IDataContext
     {
         private readonly IConfiguration _configuration;
-
         public CSVContext(IConfiguration configuration)
         {
             _configuration = configuration;
         }
-        
         public void SaveChanges()
         {
-            
             {
                 using (var writer = new StreamWriter(_configuration.GetSection("csvFileLocation").Value))
                 using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
