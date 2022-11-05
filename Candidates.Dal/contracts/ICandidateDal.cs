@@ -9,6 +9,6 @@ namespace Candidates.Dal.contracts
 {
     public interface ICandidateDal
     {
-        Task<CoreResponseModel<Candidate>> UpsertCandidate(UpsertCandidateModel upsertCandidateModel);
+        Task<CoreResponseModel<object>> UpsertCandidate(UpsertCandidateModel upsertCandidateModel);
     }
 }

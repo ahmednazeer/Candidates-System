@@ -1,7 +1,11 @@
-﻿using Candidates.Dal.contracts;
+﻿using AutoMapper;
+using Candidates.Dal.contracts;
+using Candidates.Data;
 using Candidates.Data.contracts;
 using Candidates.Entities;
+using Candidates.Helpers;
 using Candidates.Models;
+using CsvHelper.Configuration.Attributes;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -11,20 +15,23 @@ namespace Candidates.Dal
 {
     public class CandidateDal : ICandidateDal
     {
-        private readonly ICandidatesContext<Candidate> _candidatesContext;
+        private readonly IDataContext _context;
+        private readonly IMapper _mapper;
 
-        public CandidateDal(ICandidatesContext<Candidate> candidatesContext)
+        public CandidateDal(IDataContext dataContext,IMapper mapper)
         {
-            _candidatesContext = candidatesContext;
+            _context = dataContext;
+            _mapper = mapper;
         }
-        public async  Task<CoreResponseModel<Candidate>> UpsertCandidate(UpsertCandidateModel upsertCandidateModel)
+        public async  Task<CoreResponseModel<object>> UpsertCandidate(UpsertCandidateModel upsertCandidateModel)
         {
-            var candidate = await _candidatesContext.Candidate.FirstOrDefaultAsync(ca => ca.Email == upsertCandidateModel.Email);
-            if (candidate == null)
-                //return _candidatesContext.Insert();
-                return null;
+            CandidatesDataReader.CandidatesDict.TryGetValue(upsertCandidateModel.Email, out Candidate candidate);
+            candidate = _mapper.Map<Candidate>(upsertCandidateModel);
 
-            throw new NotImplementedException();
+            CandidatesDataReader.CandidatesDict[upsertCandidateModel.Email] =candidate;
+            _context.SaveChanges();
+            return new CoreResponseModel<object> ( candidate,System.Net.HttpStatusCode.OK );
+            
         }
     }
 }
