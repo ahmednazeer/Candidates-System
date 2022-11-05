@@ -16,7 +16,7 @@ namespace Candidates.Models
         
         public string Firstname { get; set; }
         
-        public string Laststname { get; set; }
+        public string Lastname { get; set; }
         public string PhoneNumber { get; set; }
         
         public string Email { get; set; }
@@ -30,7 +30,7 @@ namespace Candidates.Models
         public bool IsValid()
         {
             return !string.IsNullOrEmpty(Email)&&IsEmail(Email)&&
-                   !string.IsNullOrEmpty(Firstname) && !string.IsNullOrEmpty(Laststname)&&
+                   !string.IsNullOrEmpty(Firstname) && !string.IsNullOrEmpty(Lastname)&&
                    !string.IsNullOrEmpty(PhoneNumber) && !string.IsNullOrEmpty(FreeTextComment);
 
         }

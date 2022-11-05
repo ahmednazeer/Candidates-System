@@ -9,7 +9,7 @@ namespace Candidates.Entities
         [Required]
         public string Firstname { get; set; }
         [Required]
-        public string Laststname { get; set; }
+        public string Lastname { get; set; }
         [Phone]
         public string PhoneNumber { get; set; }
         [EmailAddress]
