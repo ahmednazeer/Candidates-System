@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Candidates.Entities
 {
-    public class Candidate:BaseEntity
+    public class Candidate
     {
         
         [Required]
