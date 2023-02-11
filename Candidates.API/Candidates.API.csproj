@@ -2,10 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>9e616dec-c876-4b36-8039-63ff466f75f8</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -13,6 +16,12 @@
     <ProjectReference Include="..\Candidates.Dal\Candidates.Dal.csproj" />
     <ProjectReference Include="..\Candidates.Data\Candidates.Data.csproj" />
     <ProjectReference Include="..\Candidates.Models\Candidates.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="data.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 
